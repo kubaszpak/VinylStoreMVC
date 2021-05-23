@@ -1,0 +1,39 @@
+﻿@model List<VinylViewModel>
+
+@{
+    ViewData["Title"] = "Shop";
+}
+
+
+<div class="row" style="box-sizing: border-box;">
+    @for (int i = 0; i < Model.Count; i += 2)
+    {
+        // w pętli wyświetlaj wszystkie albumu przekazane z HomeController w dwóch kolumnach
+        <div class="col-md-6" style="position: relative; display: flex; justify-content: center; margin-bottom: 5rem;">
+            <div class="card">
+                <img class="card-img-top" src="@Url.Content(Model[i].Photo)" alt="@Model[i].Title" style="width: 100%; height: 25vw; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@Model[i].Title</h5>
+                    <p class="card-text">Author: @Model[i].Author<br />Price: @Model[i].Price£</p>
+                    <a href="@Url.Action("GetVinylDetails", "Home", new { id = i}, null)" class="btn btn-primary">Buy</a>
+                </div>
+            </div>
+        </div>
+        @if (Model.Count % 2 == 0 || i + 1 != Model.Count)
+        {
+            // jeśli liczba albumów jest nieparzysta to w ostatnim rzędzie nie ma drugiej kolumny i ta częśc się nie wykonuje
+            <div class="col-sm-6" style="position: relative; display: flex; justify-content: center; margin-bottom: 5rem;">
+                <div class="card">
+                    <img class="card-img-top" src="@Url.Content(Model[i + 1].Photo)" alt="@Model[i+1].Title" style="width: 100%; height: 25vw; object-fit: cover; ">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model[i + 1].Title</h5>
+                        <p class="card-text">Author: @Model[i + 1].Author<br />Price: @Model[i + 1].Price£</p>
+                        <a href="@Url.Action("GetVinylDetails", "Home", new { id = i + 1 }, null)" class="btn btn-primary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100"></div>
+        }
+    }
+</div>

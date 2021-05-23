@@ -1,0 +1,20 @@
+﻿@model VinylViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h2>
+        Title: @Model.Title
+    </h2>
+    <h4>
+        Author: @Model.Author
+    </h4>
+    <h4>
+        Price: @Model.Price£
+    </h4>
+    <a href="@Url.Action("ShippingInfoForm", "Home", new { title = Model.Title }, null)" class="btn btn-dark">To checkout</a>
+    <a href="@Url.Action("NotifyForm", "Home", new { title = Model.Title }, null)" class="btn btn-outline-dark">Notify me</a>
+    <img src="@Url.Content(Model.Photo)" alt="@Model.Title" style="max-width: 60vmin" />
+</div>
